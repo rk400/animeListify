@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-AnimelistifyApplication<animelistify>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.dra.animelistify.AnimelistifyApplication",
+            "projectName": "animelistify",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
