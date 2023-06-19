@@ -1,0 +1,9 @@
+<p-carousel [value]="animes" styleClass="custom-carousel" [numVisible]="10" [numScroll]="5" [circular]="false" [autoplayInterval]="3000" [responsiveOptions]="responsiveOptions">
+  <ng-template let-anime pTemplate="item">
+  <a href="{{anime.url}}" class="product-item">
+          <div class="product-item-content">
+                  <img [src]="anime.image" [alt]="anime.title" class="product-image" />
+          </div>
+        </a>
+    </ng-template>
+</p-carousel>

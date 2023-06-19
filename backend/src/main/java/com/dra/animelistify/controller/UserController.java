@@ -5,7 +5,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
-import com.dra.animelistify.entity.Anime;
 import com.dra.animelistify.entity.User;
 import com.dra.animelistify.entity.UserAnime;
 import com.dra.animelistify.service.UserService;
@@ -39,10 +38,10 @@ public class UserController {
     @PostMapping("/{userId}/animes")
     public ResponseEntity<User> addAnime(
             @PathVariable Long userId,
-            @RequestBody UserAnime anime) {
+            @RequestBody String idAnime) {
         User user = userService.getUser(userId);
         if (user != null) {
-            user.addAnime(anime);
+            user.addAnime(idAnime);
             userService.saveUser(user); // Guardar el usuario actualizado con el nuevo favorito
             return new ResponseEntity<>(user, HttpStatus.OK);
         } else {
@@ -66,6 +65,37 @@ public class UserController {
             }
             if (animeToRemove != null) {
                 user.removeAnime(animeToRemove);
+                userService.saveUser(user);
+                return new ResponseEntity<>(HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PutMapping("/{userId}/animes/{idAnime}")
+    public ResponseEntity<?> updateAnime(
+            @PathVariable Long userId,
+            @PathVariable Long idAnime,
+            @RequestBody UserAnime updatedAnime) {
+        User user = userService.getUser(userId);
+        if (user != null) {
+            List<UserAnime> animes = user.getUserAnimes();
+            UserAnime animeToUpdate = null;
+            for (UserAnime anime : animes) {
+                if (anime.getId().equals(idAnime)) {
+                    animeToUpdate = anime;
+                    break;
+                }
+            }
+            if (animeToUpdate != null) {
+                animeToUpdate.setStatus(updatedAnime.getStatus());
+                animeToUpdate.setStartDate(updatedAnime.getStartDate());
+                animeToUpdate.setEndDate(updatedAnime.getEndDate());
+                animeToUpdate.setRating(updatedAnime.getRating());
+                animeToUpdate.setEpisodeProgress(updatedAnime.getEpisodeProgress());
                 userService.saveUser(user);
                 return new ResponseEntity<>(HttpStatus.OK);
             } else {

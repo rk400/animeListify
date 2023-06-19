@@ -1,0 +1,14 @@
+<p-carousel [value]="animes" styleClass="custom-carousel" [numVisible]="6" [numScroll]="1" [circular]="true" [autoplayInterval]="3000" [responsiveOptions]="responsiveOptions">
+  <ng-template>
+  </ng-template>
+  <ng-template let-anime>
+      <div class="product-item">
+          <div class="product-item-content">
+              <div>
+                  <img href=${{anime.url}  [src]="anime.image" [alt]="anime.title" class="product-image" />
+                  <h3 style="background-color: rgba(0,0,0,0.6); border-radius: 5px; margin: 100px;" class="p-mt-0 p-mb-3">{{anime.rating}}</h3>
+              </div>
+          </div>
+      </div>
+  </ng-template>
+</p-carousel>

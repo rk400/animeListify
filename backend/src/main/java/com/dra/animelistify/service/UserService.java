@@ -7,16 +7,18 @@ import org.springframework.stereotype.Service;
 
 import com.dra.animelistify.entity.User;
 import com.dra.animelistify.entity.UserAnime;
-import com.dra.animelistify.entity.Anime;
 import com.dra.animelistify.repository.UserRepository;
+import com.dra.animelistify.repository.UserAnimeRepository;
 
 @Service
 public class UserService {
     
     private final UserRepository userRepository;
+    private final UserAnimeRepository userAnimeRepository;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository , UserAnimeRepository userAnimeRepository) {
         this.userRepository = userRepository;
+        this.userAnimeRepository = userAnimeRepository;
     }
 
     public User createUser(User user) {
@@ -27,10 +29,19 @@ public class UserService {
         return userRepository.findById(userId).orElse(null);
     }
 
-    public void addAnime(Long userId, UserAnime anime) {
+    public void addAnime(Long userId, String idAnime) {
         User user = userRepository.findById(userId).orElse(null);
         if (user != null) {
-            user.addAnime(anime);
+            user.addAnime(idAnime);
+            userRepository.save(user);
+        }
+    }
+
+    public void deleteAnime(Long userId, String idAnime) {
+        User user = userRepository.findById(userId).orElse(null);
+        UserAnime anime = userAnimeRepository.findByIdAnime(idAnime);
+        if (user != null) {
+            user.removeAnime(anime);
             userRepository.save(user);
         }
     }

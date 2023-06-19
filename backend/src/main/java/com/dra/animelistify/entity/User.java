@@ -11,9 +11,14 @@ public class User {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-
+  
+  @Column(name = "name")
   private String name;
+
+  @Column(name = "email")
   private String email;
+
+  @Column(name = "password")
   private String password;
 
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -69,7 +74,8 @@ public class User {
     this.userAnimes = userAnimes;
   }
 
- public void addAnime(UserAnime userAnime) {
+ public void addAnime(String idAnime) {
+    UserAnime userAnime = new UserAnime(this ,idAnime);
     userAnimes.add(userAnime);
     userAnime.setUser(this);
 }

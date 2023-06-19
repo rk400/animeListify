@@ -1,6 +1,6 @@
 package com.dra.animelistify.entity;
 
-import java.util.List;
+import java.sql.Date;
 import javax.persistence.*;
 
 @Entity
@@ -15,9 +15,21 @@ public class UserAnime {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "anime_id")
-    private Anime anime;
+    // anime data
+    @Column(name = "id_anime")
+    private String idAnime;
+
+    @Column(name = "start_date")
+    private Date startDate;
+
+    @Column(name = "end_date")
+    private Date endDate;
+
+    @Column(name = "rating")
+    private double rating;
+
+    @Column(name = "episode_progress")
+    private int episodeProgress;
 
     @Enumerated(EnumType.STRING)
     private AnimeStatus status;
@@ -25,10 +37,18 @@ public class UserAnime {
     public UserAnime() {
     }
 
-    public UserAnime(User user, Anime anime, AnimeStatus status) {
+    public UserAnime(User user, String idAnime){
         this.user = user;
-        this.anime = anime;
+        this.idAnime = idAnime;
+    }
+
+    public UserAnime(User user, String idAnime, AnimeStatus status, Date startDate, Date endDate, int episodeProgress) {
+        this.user = user;
+        this.idAnime = idAnime;
         this.status = status;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.episodeProgress = episodeProgress;
     }
 
     public Long getId() {
@@ -39,8 +59,44 @@ public class UserAnime {
         return user;
     }
 
-    public Anime getAnime() {
-        return anime;
+    public String getIdAnime() {
+        return idAnime;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public int getEpisodeProgress() {
+        return episodeProgress;
+    }
+
+    public void setIdAnime(String idAnime) {
+        this.idAnime = idAnime;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate= endDate;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
+    public void setEpisodeProgress(int episodeProgress) {
+        this.episodeProgress = episodeProgress;
     }
 
     public AnimeStatus getStatus() {
@@ -55,15 +111,20 @@ public class UserAnime {
         this.user = user;
     }
 
-    public void setAnime(Anime anime) {
-        this.anime = anime;
-    }
-
     public void setStatus(AnimeStatus status) {
         this.status = status;
     }
 
+    @Override
     public String toString() {
-        return "User: " + this.user.getName() + "\n" + "Anime: " + this.anime.getTitle() + "\n" + "Status: " + this.status + "\n";
+        return "UserAnime{" +
+                "id=" + id +
+                ", user=" + user +
+                ", idAnime='" + idAnime + '\'' +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", episodeProgress=" + episodeProgress +
+                ", status=" + status +
+                '}';
     }
 }
