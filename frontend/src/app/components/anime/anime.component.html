@@ -3,19 +3,34 @@
   <input type="text" pInputText [(ngModel)]="keyword"/>
 </div>
 
-<p-dataView [styleClass]="'grid'" #dv [value]="animes" [layout]="'grid'">
-  <ng-template let-anime pTemplate="gridItem">
-    <div>
-      <div class="col-12" style="display: flex;">
-        <a [routerLink]="['/anime-detail']" [queryParams]="{ title: anime.title}" class="link">
-          <img [src]="anime.main_picture.medium">
-                </a>
+  <!-- <p-dataView
+      #dv [value]="animes"
+      [rows]="4" filterBy="name" layout="grid">
+     <ng-template pTemplate="header">
+          <p-dataViewLayoutOptions>
+         </p-dataViewLayoutOptions>
+      </ng-template>
 
-      </div>
-    </div>
-  </ng-template>
-</p-dataView>
+      <ng-template let-anime pTemplate="gridItem">
+          <div class="p-col-12 p-md-4">
+              <div class="product-grid-item">
+                <a [routerLink]="['/anime-detail']" [queryParams]="{ title: anime.title, main_picture: anime.main_picture.large }" class="link">
+                  <img [src]="anime.main_picture.medium">
+                        </a>
+              </div>
+          </div>
+      </ng-template>
+  </p-dataView> -->
 
+    <p-dataView [styleClass]="'grid'" #dv [value]="animes" [layout]="'grid'">
+      <ng-template  let-anime pTemplate="gridItem">
+        <div class="col-2" style="display: flex; justify-content: center;">
+          <a [routerLink]="['/anime-detail']" [queryParams]="{ title: anime.title, main_picture: anime.main_picture.large }" class="link">
+            <img height="338px" width="225px" [src]="anime.main_picture.medium">
+          </a>
+        </div>
+      </ng-template>
+    </p-dataView>
 
 
 <!-- <div class ="products-container">

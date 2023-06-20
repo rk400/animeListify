@@ -10,6 +10,7 @@ import com.dra.animelistify.entity.UserAnime;
 import com.dra.animelistify.service.UserService;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/users")
 public class UserController {
 

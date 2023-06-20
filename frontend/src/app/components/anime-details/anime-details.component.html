@@ -1,1 +1,42 @@
-<p>anime-details works!</p>
+<div class="container">
+
+  <div class="detail-product">
+
+    <div class="top">
+        <div class="info">
+          <div class="container-img">
+              <img src="{{main_picture}}" alt="product" class="img-product">
+          </div>
+          <div class="container-data">
+            <h1>Product Details</h1>
+            <hr>
+              <div>
+              <h2>{{title}}</h2>
+              </div>
+              <div>
+              <h2>{{genres}}</h2>
+              </div>
+              <div style="display: flex;">
+              <h3 style="font-weight: bold; margin-right: 1em;">Shop:</h3>
+              <h3>{{synopsis}}</h3>
+              </div>
+              <div style="display: flex;">
+              <h3 style="font-weight: bold;margin-right: 1em;">Shipping:  </h3>
+              <h3>{{rating}}</h3>
+              </div>
+          </div>
+        </div>
+        <div class="rating">
+          <div class="rating-container">
+            <h1 style="margin-top: 2em;">Product Rating</h1>
+            <hr>
+            <h2>Average rating for this product:</h2>
+            <div class="stars">
+              <span [innerHTML]="starGenerator(rating)"></span>
+              <h3 style="margin-top: 1em;">{{rating}}</h3>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
