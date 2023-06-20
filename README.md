@@ -16,6 +16,7 @@
 **[Description](#description)**<br>
 **[Project deployment](#project-deployment)**<br>
 **[Working tools](#working-tools)**<br>
+**[Schedule](#schedule)**<br>
 **[Author](#author)**<br>
 **[License](#license)**<br>
 
@@ -54,6 +55,30 @@ These are the different tools that we are going to use in the project:
 mindmap
    id)Ruth Maria Rodriguez Simon(    
 ```
+
+## Schedule
+```mermaid
+gantt
+    dateFormat  YYYY-MM-DD
+    title       Development chronology
+
+    section Prototype
+    Desing on Figma           :crit,   d1,2023-06-16, 12h
+
+    section Backend
+    Scrapping                 :crit,  after d1, 2023-06-17
+    Database                  :crit,  after d1, 2023-06-20
+
+    section Frontend
+    API Conection             :crit, 2023-06-17, 2023-06-18
+    Srapping Conection        :crit, 2023-06-17, 2023-06-18
+    Create views    :crit,     2023-06-17, 2023-06-20
+
+    section Deploy
+    Dockerize the app :crit, 2023-06-20, 2023-06-20, 3h
+    Deploy to Github Pages :crit, 2023-06-20, 2023-06-20, 1h
+```
+
 ## License
 
 Copyright (c) 2023 AnimeListify
