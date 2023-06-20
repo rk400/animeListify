@@ -1,5 +1,6 @@
 package com.dra.animelistify.controller;
 
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -37,14 +38,19 @@ public class UserController {
     }
 
     @PostMapping("/{userId}/animes")
-    public ResponseEntity<User> addAnime(
+    public ResponseEntity<UserAnime> addAnime(
             @PathVariable Long userId,
             @RequestBody String idAnime) {
         User user = userService.getUser(userId);
         if (user != null) {
-            user.addAnime(idAnime);
-            userService.saveUser(user); // Guardar el usuario actualizado con el nuevo favorito
-            return new ResponseEntity<>(user, HttpStatus.OK);
+            try {
+                UserAnime ua = user.addAnime(idAnime);
+                userService.saveUser(user); // Guardar el usuario actualizado con el nuevo favorito
+                return new ResponseEntity<>(ua, HttpStatus.CREATED);
+            } catch (InvalidDataAccessApiUsageException e) {
+                // Se devuelve 202 porque el anime ya estaba en la lista
+                return new ResponseEntity<>(HttpStatus.ACCEPTED);
+            }
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

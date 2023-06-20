@@ -17,7 +17,7 @@ export class AnimeDetailsComponent implements OnInit {
   main_picture = '';
   rating = '';
   synopsis = '';
-  genre: any[] = [];
+  genres: any[] = [];
   episodes = '';
   status = '';
   start_date: Date | undefined;
@@ -39,10 +39,11 @@ export class AnimeDetailsComponent implements OnInit {
   ngOnInit(): void {
 
     this.route.queryParams.subscribe(params => {
+      console.log(params)
       this.title = params['title'];
       this.main_picture = params['main_picture'];
       this.synopsis = params['synopsis'];
-      this.genre = params['genre'];
+      this.genres = params['genres'];
       this.episodes = params['episodes'];
       this.rating = params['rating'];
       this.status = params['status'];

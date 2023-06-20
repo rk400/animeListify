@@ -1,37 +1,97 @@
 <div class="parent">
+  <div class="grid">
+    <div class="col-2" style="margin: 70px;">
+      <img
+        src="{{ main_picture }}"
+        alt="{{ title }}"
+        style="width: 225px; height: 338px; object-fit: cover"
+      />
+      <h3 style="justify-content: center; display: flex; margin-top: 10px;">
+        Rating:
+        <p-tag [style]="{ background: '#74b64f' }" value="{{ rating }}"></p-tag>
+      </h3>
+      <p-button
+        (click)="showDialog()"
+        icon="pi pi-file-edit"
+        label="Add to my list"
+        [ngStyle]="{ 'justify-content': 'center', 'display': 'flex', 'margin-top': '10px' }"
+        styleClass="p-button-raised p-button-rounded"
+      ></p-button>
+      <p-dialog
+        header="Header"
+        [(visible)]="visible"
+        [style]="{ width: '50vw' }"
+      >
+        <ng-template pTemplate="header">
+          <span class="text-xl font-bold">Add {{title}} to my list</span>
+        </ng-template>
+        <ng-template pTemplate="content">
+          <div class="grid">
+            <div class="col-4">
+              <p>Status:</p>
+              <p-dropdown
 
-  <div class="image">
-    <img  src="{{main_picture}}" alt="{{title}}">
-  </div>
-
-  <div class="status-box">
-    <span class="p-float-label">
-        <p-dropdown [options]="userStatus" [(ngModel)]="selectedStatus" placeholder="Select a City" optionLabel="name" inputId="float-label"></p-dropdown>
-        <label style="font-family: Montserrat;" for="float-label">Select status</label>
-    </span>
-  </div>
-
-  <div class="detail-view">
-    <p-button (click)="showDialog()" icon="pi pi-file-edit" label="Añadir a lista"></p-button>
-<p-dialog header="Header" [(visible)]="visible" [style]="{ width: '50vw' }">
-    <ng-template pTemplate="header">
-        <span class="text-xl font-bold">Añadir {{title}} a lista</span>
-    </ng-template>
-    <img src="{{main_picture}}" alt="{{title}}" style="width: 225px; height: 338px; object-fit: cover;">
-    <a>{{rating}}</a>
-    <ng-template pTemplate="footer">
-        <p-button icon="pi pi-check" (click)="visible = false" label="Ok" styleClass="p-button-text"></p-button>
-    </ng-template>
-</p-dialog>
-  </div>
-
-  <div class="description">
-    <p> {{synopsis}}</p>
-
+                optionLabel="name"
+              ></p-dropdown>
+            </div>
+            <div class="col-4">
+              <p>Rating:</p>
+<p-inputNumber>
+</p-inputNumber>
+            </div>
+            <div class="col-4">
+              <p>Start Date:</p>
+              <input type="date"/>
+            </div>
+            <div class="col-4">
+              <p>End Date:</p>
+              <input type="date"/>
+            </div>
+            <div class="col-4">
+              <p>Episode Progress:</p>
+              <p-inputNumber>
+              </p-inputNumber>
+            </div>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="footer">
+          <p-button
+            icon="pi pi-check"
+            (click)="visible = false"
+            label="Ok"
+            styleClass="p-button-text"
+          ></p-button>
+        </ng-template>
+      </p-dialog>
     </div>
-  <div class="genre">
-    {{genre}}
+
+    <div class="col-8">
+      <div class="col-8">
+        <h1>{{ title }}</h1>
+      </div>
+      <div class="grid">
+        <div *ngIf="genres != undefined" class="col-8">
+          <h3>
+            Genre:
+            <ng-container *ngFor="let genre of genres">
+              <p-chip class="pr-2" label="{{ genre }}"></p-chip>
+            </ng-container>
+          </h3>
+        </div>
+        <div class="col-3">
+          <h3>
+            Episodes:
+            <p-tag severity="danger" value="">{{ episodes }}</p-tag>
+          </h3>
+        </div>
+      </div>
+      <p-fieldset
+        legend="Synopsis"
+        class="description"
+        styles="margin-top: 50px;"
+      >
+        <p>{{ synopsis }}</p>
+      </p-fieldset>
+    </div>
   </div>
-
-
 </div>

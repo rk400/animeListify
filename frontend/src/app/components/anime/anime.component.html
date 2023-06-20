@@ -1,31 +1,12 @@
 <div style="justify-content: center; width: 100%; margin-top: 10px; margin-bottom: 15px;" class="p-input-icon-left">
   <i class="pi pi-search"></i>
-  <input type="text" pInputText [(ngModel)]="keyword"/>
+  <input pInputText type="text" [(ngModel)]="searchString" (keydown)="search($event)"/>
 </div>
-
-  <!-- <p-dataView
-      #dv [value]="animes"
-      [rows]="4" filterBy="name" layout="grid">
-     <ng-template pTemplate="header">
-          <p-dataViewLayoutOptions>
-         </p-dataViewLayoutOptions>
-      </ng-template>
-
-      <ng-template let-anime pTemplate="gridItem">
-          <div class="p-col-12 p-md-4">
-              <div class="product-grid-item">
-                <a [routerLink]="['/anime-detail']" [queryParams]="{ title: anime.title, main_picture: anime.main_picture.large }" class="link">
-                  <img [src]="anime.main_picture.medium">
-                        </a>
-              </div>
-          </div>
-      </ng-template>
-  </p-dataView> -->
 
     <p-dataView styleClass="custom-dataview" #dv [value]="animes" [layout]="'grid'">
       <ng-template  let-anime pTemplate="gridItem">
         <div class="col-2" style="display: flex; justify-content: center; gap: 10px">
-          <a [routerLink]="['/anime-detail']" [queryParams]="{ title: anime.title, main_picture: anime.main_picture.large, synopsis: anime.synopsis, genre: anime.genre, episodes: anime.num_episodes, rating: anime.mean }" class="link">
+          <a [routerLink]="['/anime-detail']" [queryParams]="{ title: anime.title, main_picture: anime.main_picture.large, synopsis: anime.synopsis, genres: anime.genres, episodes: anime.num_episodes, rating: anime.mean }" class="link">
             <img height="338px" width="225px" [src]="anime.main_picture.medium">
           </a>
         </div>
@@ -33,49 +14,3 @@
     </p-dataView>
 
     <p-scrollTop target="parent" styleClass="custom-scrolltop" [threshold]="100" icon="pi pi-arrow-up"></p-scrollTop>
-<!-- <div class ="products-container">
-
-  <div class="searching-items">
-    <div class="search">
-      <input type="text" class="searchinput" [(ngModel)]="keyword" placeholder="Search your product ...">
-      <button class="button" (click)="search(keyword)"><i class="fa fa-search" aria-hidden="true"></i></button>
-    </div>
-
-    <div class="filter">
-      <select class="selector" [(ngModel)]="seleccionado"(change)="filter()">
-        <option value="">Filter</option>
-        <option value="PrecioM">Price (High to Low)</option>
-        <option value="Preciom">Price (Low to High)</option>
-        <option value="Name">Name (Z - A)</option>
-        <option value="NameR">Name (A - Z)</option>
-      </select>
-    </div>
-  </div>
-
-
-  <div class="products">
-    <div class="list">
-        <div class="product_list">
-
-          <div class="card" *ngFor="let anime of animes | slice:from:to">
-            <a [routerLink]="['/product-detail']" [queryParams]="{ title: anime.title}" class="link">
-
-              <div class="front-card">
-                <div class="image_flex_row">
-                  <img #productImage class="product_image" src="{{anime.image}}" alt="{{anime.title}}">
-                </div>
-                <div class="product_name">
-                  <p>{{anime.title}}</p>
-                </div>
-                <h3 class="product_price">{{anime.rating}}</h3>
-              </div>
-              <div class="card-description">
-                <p class="product_name">{{anime.title}}</p>
-                <p class="description">Shop: {{anime.synopsis}}</p>
-              </div>
-            </a>
-          </div>
-        </div>
-    </div>
-  </div>
-</div> -->

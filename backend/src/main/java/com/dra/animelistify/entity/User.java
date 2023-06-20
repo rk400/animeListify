@@ -3,6 +3,8 @@ package com.dra.animelistify.entity;
 import java.util.List;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -21,7 +23,7 @@ public class User {
   private String password;
 
   @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-  @JoinColumn(name = "user_id")
+  @JoinColumn(name = "user_id") @JsonIgnore
   private List<UserAnime> userAnimes;
 
   public User() {
@@ -74,9 +76,10 @@ public class User {
     this.userAnimes = userAnimes;
   }
 
- public void addAnime(String idAnime) {
+ public UserAnime addAnime(String idAnime) {
     UserAnime userAnime = new UserAnime(this, idAnime);
     userAnimes.add(userAnime);
+    return userAnime;
 }
 
 public void removeAnime(UserAnime userAnime) {

@@ -14,7 +14,7 @@ export class AnimeComponent implements OnInit {
   pageSize : number = 20;
   from : number = 0;
   to : number = 20;
-  keyword : string = '';
+  searchString : string = '';
   layout: string = 'list';
 
   groupOfAnimes : Anime[][] = [];
@@ -2264,16 +2264,17 @@ export class AnimeComponent implements OnInit {
     });
   }
 
-  search(query:string) : void {
-    this.animeAPIService.searchAnimeAPI(query)
-      .subscribe(
-        (data: any[]) => {
-        this.animes = data;
-        console.log("Resultado: ", data);
-    },
-    (error) => {
-      console.log("Error: ", error);
-    });
+  search(event: KeyboardEvent) : void {
+    if(event.key === 'Enter')
+      this.animeAPIService.searchAnimeAPI(this.searchString)
+        .subscribe(
+          (data: any[]) => {
+            this.animes = data;
+            console.log("Resultado: ", data);
+          },
+          (error) => {
+            console.log("Error: ", error);
+        });
   }
 
   filter() {
