@@ -1,42 +1,37 @@
-<div class="container">
+<div class="parent">
 
-  <div class="detail-product">
-
-    <div class="top">
-        <div class="info">
-          <div class="container-img">
-              <img src="{{main_picture}}" alt="product" class="img-product">
-          </div>
-          <div class="container-data">
-            <h1>Product Details</h1>
-            <hr>
-              <div>
-              <h2>{{title}}</h2>
-              </div>
-              <div>
-              <h2>{{genres}}</h2>
-              </div>
-              <div style="display: flex;">
-              <h3 style="font-weight: bold; margin-right: 1em;">Shop:</h3>
-              <h3>{{synopsis}}</h3>
-              </div>
-              <div style="display: flex;">
-              <h3 style="font-weight: bold;margin-right: 1em;">Shipping:  </h3>
-              <h3>{{rating}}</h3>
-              </div>
-          </div>
-        </div>
-        <div class="rating">
-          <div class="rating-container">
-            <h1 style="margin-top: 2em;">Product Rating</h1>
-            <hr>
-            <h2>Average rating for this product:</h2>
-            <div class="stars">
-              <span [innerHTML]="starGenerator(rating)"></span>
-              <h3 style="margin-top: 1em;">{{rating}}</h3>
-            </div>
-          </div>
-        </div>
-    </div>
+  <div class="image">
+    <img  src="{{main_picture}}" alt="{{title}}">
   </div>
+
+  <div class="status-box">
+    <span class="p-float-label">
+        <p-dropdown [options]="userStatus" [(ngModel)]="selectedStatus" placeholder="Select a City" optionLabel="name" inputId="float-label"></p-dropdown>
+        <label style="font-family: Montserrat;" for="float-label">Select status</label>
+    </span>
+  </div>
+
+  <div class="detail-view">
+    <p-button (click)="showDialog()" icon="pi pi-file-edit" label="Añadir a lista"></p-button>
+<p-dialog header="Header" [(visible)]="visible" [style]="{ width: '50vw' }">
+    <ng-template pTemplate="header">
+        <span class="text-xl font-bold">Añadir {{title}} a lista</span>
+    </ng-template>
+    <img src="{{main_picture}}" alt="{{title}}" style="width: 225px; height: 338px; object-fit: cover;">
+    <a>{{rating}}</a>
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-check" (click)="visible = false" label="Ok" styleClass="p-button-text"></p-button>
+    </ng-template>
+</p-dialog>
+  </div>
+
+  <div class="description">
+    <p> {{synopsis}}</p>
+
+    </div>
+  <div class="genre">
+    {{genre}}
+  </div>
+
+
 </div>

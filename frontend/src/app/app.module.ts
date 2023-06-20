@@ -10,6 +10,9 @@ import { CarouselModule } from 'primeng/carousel';
 import { InputTextModule } from 'primeng/inputtext';
 import { TagModule } from 'primeng/tag';
 import { SkeletonModule } from 'primeng/skeleton';
+import { DialogModule } from 'primeng/dialog';
+import { DropdownModule } from 'primeng/dropdown';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 
@@ -48,12 +51,15 @@ import { DataViewModule, DataViewLayoutOptions } from 'primeng/dataview';
     ButtonModule,
     CardModule,
     CarouselModule,
+    DropdownModule,
+    DialogModule,
     TagModule,
     ScrollTopModule,
     InputTextModule,
     SkeletonModule,
     HttpClientModule,
-    DataViewModule
+    DataViewModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

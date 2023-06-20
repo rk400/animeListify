@@ -17,11 +17,18 @@ export class AnimeDetailsComponent implements OnInit {
   main_picture = '';
   rating = '';
   synopsis = '';
-  genres: any[] = [];
+  genre: any[] = [];
   episodes = '';
   status = '';
   start_date: Date | undefined;
   end_date: Date | undefined;
+  userStatus: any[] | undefined;
+  selectedStatus: any | undefined;
+  visible: boolean = false;
+
+    showDialog() {
+        this.visible = true;
+    }
 
   constructor(
     private route: ActivatedRoute,
@@ -35,13 +42,21 @@ export class AnimeDetailsComponent implements OnInit {
       this.title = params['title'];
       this.main_picture = params['main_picture'];
       this.synopsis = params['synopsis'];
-      this.genres = params['genres'];
+      this.genre = params['genre'];
       this.episodes = params['episodes'];
       this.rating = params['rating'];
       this.status = params['status'];
       this.start_date = params['start_date'];
       this.end_date = params['end_date'];
     });
+
+    this.userStatus = [
+      { name: 'Watching', code: 'NY' },
+      { name: 'Planning to Watch', code: 'RM' },
+      { name: 'Completed', code: 'LDN' },
+      { name: 'Istanbul', code: 'IST' },
+      { name: 'Paris', code: 'PRS' }
+  ];
   }
   ratingConverter(rating: string): number | null {
     const regex = /^([\d,.]+)/;

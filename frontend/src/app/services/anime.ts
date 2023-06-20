@@ -4,13 +4,14 @@ export interface Anime {
   title_english?: string;
   image?: string;
   rating?: string;
+  mean?: number;
   url?: string;
   synopsis?: string;
   genres?: string[];
-  episodes?: number;
+  num_episodes?: number;
   status?: string;
-  start_date?: Date;
-  end_date?: Date;
+  start_date?: string;
+  end_date?: string | null;
   main_picture?: AnimePictures;
   //user_status: string;
   //user_start_date: Date;

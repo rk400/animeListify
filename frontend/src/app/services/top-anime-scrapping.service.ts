@@ -28,10 +28,10 @@ export class TopAnimeScrappingService {
           url: response[i].url,
           synopsis: '',
           genres: [],
-          episodes: 0,
+          num_episodes: 0,
           status: '',
-          start_date: new Date(),
-          end_date: new Date(),
+          start_date: '',
+          end_date: '',
         };
         this.topAnimes.push(anime);
       }

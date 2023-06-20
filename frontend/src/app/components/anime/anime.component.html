@@ -1,4 +1,4 @@
-<div style="justify-content: center; width: 100%; margin-top: 10px;" class="p-input-icon-left">
+<div style="justify-content: center; width: 100%; margin-top: 10px; margin-bottom: 15px;" class="p-input-icon-left">
   <i class="pi pi-search"></i>
   <input type="text" pInputText [(ngModel)]="keyword"/>
 </div>
@@ -22,17 +22,17 @@
       </ng-template>
   </p-dataView> -->
 
-    <p-dataView [styleClass]="'grid'" #dv [value]="animes" [layout]="'grid'">
+    <p-dataView styleClass="custom-dataview" #dv [value]="animes" [layout]="'grid'">
       <ng-template  let-anime pTemplate="gridItem">
-        <div class="col-2" style="display: flex; justify-content: center;">
-          <a [routerLink]="['/anime-detail']" [queryParams]="{ title: anime.title, main_picture: anime.main_picture.large }" class="link">
+        <div class="col-2" style="display: flex; justify-content: center; gap: 10px">
+          <a [routerLink]="['/anime-detail']" [queryParams]="{ title: anime.title, main_picture: anime.main_picture.large, synopsis: anime.synopsis, genre: anime.genre, episodes: anime.num_episodes, rating: anime.mean }" class="link">
             <img height="338px" width="225px" [src]="anime.main_picture.medium">
           </a>
         </div>
       </ng-template>
     </p-dataView>
 
-
+    <p-scrollTop target="parent" styleClass="custom-scrolltop" [threshold]="100" icon="pi pi-arrow-up"></p-scrollTop>
 <!-- <div class ="products-container">
 
   <div class="searching-items">
