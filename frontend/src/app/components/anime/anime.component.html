@@ -1,7 +1,23 @@
-<div style="justify-content: center; width: 80%;" class="p-input-icon-left">
+<div style="justify-content: center; width: 100%; margin-top: 10px;" class="p-input-icon-left">
   <i class="pi pi-search"></i>
-  <input type="text" pInputText />
+  <input type="text" pInputText [(ngModel)]="keyword"/>
 </div>
+
+<p-dataView [styleClass]="'grid'" #dv [value]="animes" [layout]="'grid'">
+  <ng-template let-anime pTemplate="gridItem">
+    <div>
+      <div class="col-12" style="display: flex;">
+        <a [routerLink]="['/anime-detail']" [queryParams]="{ title: anime.title}" class="link">
+          <img [src]="anime.main_picture.medium">
+                </a>
+
+      </div>
+    </div>
+  </ng-template>
+</p-dataView>
+
+
+
 <!-- <div class ="products-container">
 
   <div class="searching-items">

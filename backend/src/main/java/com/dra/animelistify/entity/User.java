@@ -1,6 +1,5 @@
 package com.dra.animelistify.entity;
 
-import java.util.Iterator;
 import java.util.List;
 import javax.persistence.*;
 
@@ -21,7 +20,8 @@ public class User {
   @Column(name = "password")
   private String password;
 
-  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @JoinColumn(name = "user_id")
   private List<UserAnime> userAnimes;
 
   public User() {
@@ -75,9 +75,8 @@ public class User {
   }
 
  public void addAnime(String idAnime) {
-    UserAnime userAnime = new UserAnime(this ,idAnime);
+    UserAnime userAnime = new UserAnime(this, idAnime);
     userAnimes.add(userAnime);
-    userAnime.setUser(this);
 }
 
 public void removeAnime(UserAnime userAnime) {

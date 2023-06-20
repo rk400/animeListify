@@ -39,7 +39,7 @@ public class UserService {
 
     public void deleteAnime(Long userId, String idAnime) {
         User user = userRepository.findById(userId).orElse(null);
-        UserAnime anime = userAnimeRepository.findByIdAnime(idAnime);
+        UserAnime anime = userAnimeRepository.findById(idAnime);
         if (user != null) {
             user.removeAnime(anime);
             userRepository.save(user);

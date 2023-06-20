@@ -21,6 +21,7 @@ export class TopAnimeScrappingService {
     this.getScrappingTopAnime().subscribe((response: any) => {
       for (let i = 0; i < 30; i++) {
         const anime: Anime = {
+          id: response[i].id,
           title: response[i].title,
           image: response[i].image,
           rating: response[i].rating,

@@ -6,18 +6,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "user_anime")
 public class UserAnime {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
-    // anime data
-    @Column(name = "id_anime")
-    private String idAnime;
+    @EmbeddedId
+    private UserAnimeId id;
 
     @Column(name = "start_date")
     private Date startDate;
@@ -37,30 +27,20 @@ public class UserAnime {
     public UserAnime() {
     }
 
-    public UserAnime(User user, String idAnime){
-        this.user = user;
-        this.idAnime = idAnime;
+    public UserAnime(User user, String idAnime) {
+        this.id = new UserAnimeId(user, idAnime);
     }
 
     public UserAnime(User user, String idAnime, AnimeStatus status, Date startDate, Date endDate, int episodeProgress) {
-        this.user = user;
-        this.idAnime = idAnime;
+        this.id = new UserAnimeId(user, idAnime);
         this.status = status;
         this.startDate = startDate;
         this.endDate = endDate;
         this.episodeProgress = episodeProgress;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
     public String getIdAnime() {
-        return idAnime;
+        return id.getIdAnime();
     }
 
     public Date getStartDate() {
@@ -80,7 +60,7 @@ public class UserAnime {
     }
 
     public void setIdAnime(String idAnime) {
-        this.idAnime = idAnime;
+        id.setIdAnime(idAnime);
     }
 
     public void setStartDate(Date startDate) {
@@ -99,16 +79,24 @@ public class UserAnime {
         this.episodeProgress = episodeProgress;
     }
 
-    public AnimeStatus getStatus() {
-        return status;
+    public UserAnimeId getId() {
+        return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UserAnimeId id) {
         this.id = id;
     }
 
+    public User getUser() {
+        return id.getUser();
+    }
+
     public void setUser(User user) {
-        this.user = user;
+        id.setUser(user);
+    }
+
+    public AnimeStatus getStatus() {
+        return status;
     }
 
     public void setStatus(AnimeStatus status) {
@@ -118,9 +106,8 @@ public class UserAnime {
     @Override
     public String toString() {
         return "UserAnime{" +
-                "id=" + id +
-                ", user=" + user +
-                ", idAnime='" + idAnime + '\'' +
+                ", user=" + id.getUser() +
+                ", idAnime='" + id.getIdAnime() + '\'' +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 ", episodeProgress=" + episodeProgress +

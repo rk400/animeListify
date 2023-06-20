@@ -58,7 +58,7 @@ public class UserController {
             List<UserAnime> animes = user.getUserAnimes();
             UserAnime animeToRemove = null;
             for (UserAnime anime : animes) {
-                if (anime.getId().equals(animeId)) {
+                if (anime.getIdAnime().equals(animeId)) {
                     animeToRemove = anime;
                     break;
                 }
@@ -85,7 +85,7 @@ public class UserController {
             List<UserAnime> animes = user.getUserAnimes();
             UserAnime animeToUpdate = null;
             for (UserAnime anime : animes) {
-                if (anime.getId().equals(idAnime)) {
+                if (anime.getIdAnime().equals(idAnime)) {
                     animeToUpdate = anime;
                     break;
                 }

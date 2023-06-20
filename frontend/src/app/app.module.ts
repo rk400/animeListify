@@ -6,7 +6,6 @@ import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { ScrollTopModule } from 'primeng/scrolltop';
-import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { CarouselModule } from 'primeng/carousel';
 import { InputTextModule } from 'primeng/inputtext';
 import { TagModule } from 'primeng/tag';
@@ -25,6 +24,7 @@ import { AnimeListComponent } from './components/anime-list/anime-list.component
 import { HomeComponent } from './components/home/home.component';
 import { TopAnimeListComponent } from './components/top-anime-list/top-anime-list.component';
 import { LoginComponent } from './components/login/login.component';
+import { DataViewModule, DataViewLayoutOptions } from 'primeng/dataview';
 
 @NgModule({
   declarations: [
@@ -50,10 +50,10 @@ import { LoginComponent } from './components/login/login.component';
     CarouselModule,
     TagModule,
     ScrollTopModule,
-    ScrollPanelModule,
     InputTextModule,
     SkeletonModule,
-    HttpClientModule
+    HttpClientModule,
+    DataViewModule
   ],
   providers: [],
   bootstrap: [AppComponent]

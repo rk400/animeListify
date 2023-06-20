@@ -1,1 +1,52 @@
-<p>login works!</p>
+<body>
+  <div class="main">
+    <div class="container a-container" id="a-container">
+      <form class="form" id="a-form" method="" action="">
+        <h2 class="form_title title">Create Account</h2>
+        <input class="form__input" type="text" name="nameR" [(ngModel)]="nameR" placeholder="Name">
+        <input class="form__input" type="text" name="emailR" [(ngModel)]="emailR" placeholder="Email">
+        <input class="form__input" type="password" name="passwordR" [(ngModel)]="passwordR" placeholder="Password">
+        <button class="form__button button submit" >SIGN UP</button>
+        <span id="errorMessageSignUp" class="error-message"></span>
+      </form>
+    </div>
+    <div class="container b-container" id="b-container">
+      <form class="form" id="b-form" method="" action="">
+        <h2 class="form_title title">Sign in</h2>
+          <input class="form__input" type="text" name="emailLogin" [(ngModel)]="emailLogin" placeholder="Email">
+          <input class="form__input" type="password" name="passwordLogin" [(ngModel)]="passwordLogin" placeholder="Password">
+
+        <button class="form__button button submit" >SIGN IN</button>
+        <span id="errorMessage" class="error-message"></span>
+      </form>
+    </div>
+    <div class="switch" id="switch-cnt">
+      <div class="switch__circle"></div>
+      <div class="switch__circle switch__circle--t"></div>
+      <div class="switch__container" id="switch-c1">
+        <h2 class="switch__title title">Welcome Back !</h2>
+
+        <p class="switch__description description">You are already registered, login here and have fun with the cheapest prices</p>
+        <button class="switch__button button switch-btn">SIGN IN</button>
+      </div>
+      <div class="switch__container is-hidden" id="switch-c2">
+        <h2 class="switch__title title">New User?</h2>
+        <p class="switch__description description">
+          <p>You don't have an account yet? Join us and start your journey.</p>
+          <button class="switch__button button switch-btn">SIGN UP</button>
+
+      </div>
+    </div>
+  </div>
+  <div class="background-overlay" [hidden]="!backgroundisabled"></div>
+  <div class="dialog" [hidden]="!mostrarexito">
+    <label class="titulo" >Sign Up Information</label>
+    <label class="mensaje">You have been registered successfully</label>
+    <button class="cerrar" (click)="ocultarDialog()">Cerrar</button>
+  </div>
+  <div class="dialog" [hidden]="!mostrarerror">
+    <label class="titulo" >Sign Up Information</label>
+    <label class="mensaje">Username is in use. Please try again with another username</label>
+    <button class="cerrar" (click)="ocultarDialog()">Cerrar</button>
+  </div>
+</body>
