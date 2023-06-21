@@ -2,14 +2,14 @@
   {{ name }}
 </h1>
 <div>
-<h2>WATCHING</h2>
-<app-anime-list [animes]="watching"></app-anime-list>
+  <h2>WATCHING</h2>
+  <app-anime-list #watchingList [startComponent]="showAnimes"></app-anime-list>
 </div>
 <div>
-<h2>PLANNED TO WATCH</h2>
-<app-anime-list [animes]="planToWatch"></app-anime-list>
+  <h2>PLANNED TO WATCH</h2>
+  <app-anime-list #planList [startComponent]="showAnimes"></app-anime-list>
 </div>
 <div>
-<h2>COMPLETED</h2>
-<app-anime-list [animes]="completed"></app-anime-list>
+  <h2>COMPLETED</h2>
+  <app-anime-list #completedList [startComponent]="showAnimes"></app-anime-list>
 </div>

@@ -1,5 +1,6 @@
 export interface Anime {
-  id: string;
+  id?: string;
+  mal_id?: number;
   title?: string;
   title_english?: string;
   image?: string;
@@ -18,7 +19,7 @@ export interface Anime {
   episodeProgress?: number;
 }
 
-export interface AnimePictures{
+export interface AnimePictures {
   large: string;
   medium: string;
 }

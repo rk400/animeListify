@@ -6,7 +6,7 @@
     <p-dataView styleClass="custom-dataview" #dv [value]="animes" [layout]="'grid'">
       <ng-template  let-anime pTemplate="gridItem">
         <div class="col-2" style="display: flex; justify-content: center; gap: 10px">
-          <a [routerLink]="['/anime-detail']" [queryParams]="{ title: anime.title, id: anime.id, main_picture: anime.main_picture.large, synopsis: anime.synopsis, genres: anime.genres, episodes: anime.num_episodes, rating: anime.mean }" class="link">
+          <a [routerLink]="['/anime-detail']" [queryParams]="{ title: anime.title, id: anime.id, mal_id: anime.mal_id, main_picture: anime.main_picture.large, synopsis: anime.synopsis, genres: anime.genres, episodes: anime.num_episodes, rating: anime.mean }" class="link">
             <img height="338px" width="225px" [src]="anime.main_picture.medium">
           </a>
         </div>

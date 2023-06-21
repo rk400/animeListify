@@ -22,7 +22,7 @@ services:
     environment:
       - POSTGRES_USER=user
       - POSTGRES_PASSWORD=pass
-      - POSTGRES_DB=animelistify
+      - POSTGRES_DB=db
     image: postgres:latest
     ports:
       - '5432:5432'

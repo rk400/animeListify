@@ -11,7 +11,7 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class AnimeAPIService {
-  private apiKey = ''; //0e42f89998msh8918096688461e2p104704jsnd035db11df5d';
+  private apiKey = '0e42f89998msh8918096688461e2p104704jsnd035db11df5d';
   private apiUrl = 'animes5.p.rapidapi.com';
 
   private urlGET = 'https://animes5.p.rapidapi.com/';
@@ -38,6 +38,20 @@ export class AnimeAPIService {
     }
 
     const url = `${this.urlGET}?${query}fields=*&limit=50`;
+    const headers = new HttpHeaders({
+      'X-RapidAPI-Host': this.apiUrl,
+      'X-RapidAPI-Key': this.apiKey,
+    });
+
+    return this.http.get(url, { headers }).pipe(
+      catchError((error: HttpErrorResponse) => {
+        return throwError(error.message || 'Server error');
+      })
+    );
+  }
+
+  getAnimeAPI(mal_id: number): Observable<any> {
+    const url = `${this.urlGET}anime/${mal_id}`;
     const headers = new HttpHeaders({
       'X-RapidAPI-Host': this.apiUrl,
       'X-RapidAPI-Key': this.apiKey,

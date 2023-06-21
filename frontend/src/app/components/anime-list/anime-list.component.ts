@@ -1,16 +1,17 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Anime } from 'src/app/services/anime';
-import { AnimeAPIService } from 'src/app/services/anime-api.service';
-
-
 
 @Component({
   selector: 'app-anime-list',
   templateUrl: './anime-list.component.html',
-  styleUrls: ['./anime-list.component.sass']
+  styleUrls: ['./anime-list.component.sass'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AnimeListComponent {
-  @Input() animes: Anime[] = [];
+  animes: Anime[] = [];
+  @Input() startComponent: boolean = false;
+
+  updating: boolean = false;
   responsiveOptions: any;
   pageSize: number = 10;
   from: number = 0;
@@ -36,8 +37,5 @@ export class AnimeListComponent {
           numScroll: 1
       }
   ];
-  }
-
-  ngOnInit(): void {
   }
 }

@@ -14,6 +14,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class AnimeDetailsComponent implements OnInit {
   title = '';
   id = '';
+  mal_id = '';
   main_picture = '';
   rating = 0;
   synopsis = '';
@@ -48,6 +49,7 @@ export class AnimeDetailsComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       console.log(params)
       this.id = params['id'];
+      this.mal_id = params['mal_id'];
       this.title = params['title'];
       this.main_picture = params['main_picture'];
       this.synopsis = params['synopsis'];
@@ -111,7 +113,7 @@ export class AnimeDetailsComponent implements OnInit {
     console.log(this.status);
     const anime = {
       id: {
-        idAnime: this.id,
+        idAnime: this.mal_id,
         user: this.authService.user,
       },
       status: this.status,
