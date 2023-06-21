@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Anime } from 'src/app/services/anime';
 import { AnimeAPIService } from 'src/app/services/anime-api.service';
 
@@ -10,7 +10,7 @@ import { AnimeAPIService } from 'src/app/services/anime-api.service';
   styleUrls: ['./anime-list.component.sass']
 })
 export class AnimeListComponent {
-  animes: Anime[] = [];
+  @Input() animes: Anime[] = [];
   responsiveOptions: any;
   pageSize: number = 10;
   from: number = 0;
@@ -18,7 +18,7 @@ export class AnimeListComponent {
   keyword: string = '';
   productId: string = "1";
 
-  constructor(private animeAPIService: AnimeAPIService) {
+  constructor() {
     this.responsiveOptions = [
       {
           breakpoint: '1024px',
@@ -39,16 +39,5 @@ export class AnimeListComponent {
   }
 
   ngOnInit(): void {
-
-    this.animeAPIService.getAnimesAPI()
-      .subscribe(
-        (data: any) => {
-          this.animes = data;
-          console.log("Resultado: " + data);
-        },
-        (error) => {
-          console.error("Error al obtener el producto:", error);
-        }
-      );
   }
 }

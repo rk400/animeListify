@@ -1,1 +1,15 @@
-<p>profile works!</p>
+<h1>
+  {{ name }}
+</h1>
+<div>
+<h2>WATCHING</h2>
+<app-anime-list [animes]="watching"></app-anime-list>
+</div>
+<div>
+<h2>PLANNED TO WATCH</h2>
+<app-anime-list [animes]="planToWatch"></app-anime-list>
+</div>
+<div>
+<h2>COMPLETED</h2>
+<app-anime-list [animes]="completed"></app-anime-list>
+</div>

@@ -29,9 +29,7 @@
           <div class="grid">
             <div class="col-4">
               <p>Status:</p>
-              <p-dropdown
-
-                optionLabel="name"
+              <p-dropdown [options]="STATUSES" [(ngModel)]="status"
               ></p-dropdown>
             </div>
             <div class="col-4">
@@ -56,9 +54,9 @@
         </ng-template>
         <ng-template pTemplate="footer">
           <p-button
-            icon="pi pi-check"
-            (click)="visible = false"
-            label="Ok"
+            icon="pi pi-save"
+            (click)="saveData()"
+            label="Save"
             styleClass="p-button-text"
           ></p-button>
         </ng-template>

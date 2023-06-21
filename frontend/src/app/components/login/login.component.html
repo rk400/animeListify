@@ -6,7 +6,7 @@
         <input class="form__input" type="text" name="nameR" [(ngModel)]="nameR" placeholder="Name">
         <input class="form__input" type="text" name="emailR" [(ngModel)]="emailR" placeholder="Email">
         <input class="form__input" type="password" name="passwordR" [(ngModel)]="passwordR" placeholder="Password">
-        <button class="form__button button submit" >SIGN UP</button>
+        <button class="form__button button submit" (click)="agregarUsuario()">SIGN UP</button>
         <span id="errorMessageSignUp" class="error-message"></span>
       </form>
     </div>
@@ -16,7 +16,7 @@
           <input class="form__input" type="text" name="emailLogin" [(ngModel)]="emailLogin" placeholder="Email">
           <input class="form__input" type="password" name="passwordLogin" [(ngModel)]="passwordLogin" placeholder="Password">
 
-        <button class="form__button button submit" >SIGN IN</button>
+        <button class="form__button button submit" (click)="autenticarUsuario()">SIGN IN</button>
         <span id="errorMessage" class="error-message"></span>
       </form>
     </div>

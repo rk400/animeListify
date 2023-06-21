@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -8,13 +9,13 @@ import { Component, OnInit } from '@angular/core';
 export class NavbarComponent {
   isMenuOpen = false;
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   toggleMenu(): void {
     this.isMenuOpen = !this.isMenuOpen;
   }
 
   isLogged(): boolean {
-    return localStorage.getItem('token') !== null;
+    return this.authService.isAuthenticated();
   }
 }

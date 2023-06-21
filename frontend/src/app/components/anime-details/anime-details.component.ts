@@ -3,7 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { skip } from 'rxjs';
 import { AnimeAPIService } from 'src/app/services/anime-api.service';
-import { Anime } from 'src/app/services/anime';
+import { Anime, Status } from 'src/app/services/anime';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-anime-details',
@@ -14,6 +15,7 @@ import { Anime } from 'src/app/services/anime';
 
 export class AnimeDetailsComponent implements OnInit {
   title = '';
+  id = '';
   main_picture = '';
   rating = '';
   synopsis = '';
@@ -26,6 +28,8 @@ export class AnimeDetailsComponent implements OnInit {
   selectedStatus: any | undefined;
   visible: boolean = false;
 
+  STATUSES: Status[] = [Status.WATCHING, Status.PLAN_TO_WATCH, Status.COMPLETED];
+
     showDialog() {
         this.visible = true;
     }
@@ -33,13 +37,15 @@ export class AnimeDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private location: Location,
-    private animeAPIService: AnimeAPIService
+    private animeAPIService: AnimeAPIService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
 
     this.route.queryParams.subscribe(params => {
       console.log(params)
+      this.id = params['id'];
       this.title = params['title'];
       this.main_picture = params['main_picture'];
       this.synopsis = params['synopsis'];
@@ -108,7 +114,19 @@ export class AnimeDetailsComponent implements OnInit {
     }
     return html;
   }
-
+  saveData(): void {
+    console.log(this.id);
+    this.authService.anadirAnime(this.authService.user.id, this.id)
+      .subscribe(
+        (data: any) => {
+          console.log("Resultado: " + data);
+        },
+        (error) => {
+          console.error("Error al obtener el producto:", error);
+        }
+      );
+      this.visible = false;
+  }
   goBack(): void {
     this.location.back();
   }

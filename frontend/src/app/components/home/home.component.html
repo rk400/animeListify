@@ -1,6 +1,11 @@
 <div>
-<h2>WATCHING</h2>
-<app-topanime-list></app-topanime-list>
-<h2>TOP ANIMES</h2>
-<app-topanime-list></app-topanime-list>
+  <div *ngIf="isLogged()">
+    <h2>WATCHING</h2>
+    <app-topanime-list></app-topanime-list>
+  </div>
+  <div *ngIf="!isLogged()">
+    <h1>Log in or sign up to track your animes</h1>
+  </div>
+  <h2>TOP ANIMES</h2>
+  <app-topanime-list></app-topanime-list>
 </div>

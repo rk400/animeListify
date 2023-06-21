@@ -1,5 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 //import { AuthService } from '../../services/auth.services';
 
 
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
 
 export class LoginComponent implements AfterViewInit, OnInit {
 
-  constructor(/*private authService: AuthService*/ private router: Router) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
 
   emailLogin: string = '';
@@ -82,13 +83,13 @@ export class LoginComponent implements AfterViewInit, OnInit {
   }
 }
 
-/*
-autenticarUsuario(username : string, password:string): void {
-  if (username) {
-    this.authService.obtenerUser(username).subscribe(
+
+autenticarUsuario(): void {
+  if (this.emailLogin) {
+    this.authService.obtenerUser(this.emailLogin).subscribe(
       (response: any) => {
         console.log('Usuario obtenido:', response);
-        if(response && response.name==username && response.password == password){
+        if(response && response.name==this.emailLogin && response.password == this.passwordLogin){
           this.authService.loggedIn = true;
           this.authService.user = response;
           this.router.navigateByUrl('/profile');
@@ -162,7 +163,7 @@ comprobarDisponibilidadUsuario(nombre: string): Promise<boolean> {
     }
   }
   }
-*/
+
   mostrarDialog(exito: boolean) {
     if(exito){
       this.mostrarexito = true;
