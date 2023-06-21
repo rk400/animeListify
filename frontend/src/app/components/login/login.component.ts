@@ -1,18 +1,18 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-//import { AuthService } from '../../services/auth.services';
-
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.sass'],
+  providers: [MessageService]
 })
 
 export class LoginComponent implements AfterViewInit, OnInit {
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private messageService: MessageService) { }
 
 
   emailLogin: string = '';
@@ -98,7 +98,8 @@ autenticarUsuario(): void {
           const errorMessage = document.getElementById('errorMessage');
           if(errorMessage){
             errorMessage.style.color = 'red';
-            errorMessage.textContent = 'Credenciales incorrectas';
+            errorMessage.textContent = 'Wrong password';
+            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'User not found' });
           }
           this.authService.loggedIn = false;
         }
@@ -106,9 +107,10 @@ autenticarUsuario(): void {
       (error) => {
         console.error('Error al obtener el usuario:', error);
         const errorMessage = document.getElementById('errorMessage');
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'User not found' });
         if(errorMessage){
           errorMessage.style.color = 'red';
-          errorMessage.textContent = 'Usuario no encontrado';
+          errorMessage.textContent = 'User not found';
         }
       }
     );
@@ -149,7 +151,7 @@ comprobarDisponibilidadUsuario(nombre: string): Promise<boolean> {
       this.authService.agregarUsuario(usuario).subscribe(
         response => {
           console.log('Usuario agregado:', response);
-          this.mostrarDialog(true);
+          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'User created' });
         }
       );
     } else {
@@ -158,8 +160,9 @@ comprobarDisponibilidadUsuario(nombre: string): Promise<boolean> {
   }else{
     const errorMessage = document.getElementById('errorMessageSignUp');
     if(errorMessage){
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Please fill all the fields' });
       errorMessage.style.color = 'red';
-      errorMessage.textContent = 'Debe llenar todos los campos';
+      errorMessage.textContent = 'Please fill all the fields';
     }
   }
   }

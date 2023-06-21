@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Anime, Status } from 'src/app/services/anime';
+import { Anime } from 'src/app/services/anime';
 import { AuthService } from 'src/app/services/auth.service';
-import { User } from 'src/app/services/user';
+import { AnimeAPIService } from 'src/app/services/anime-api.service';
 
 @Component({
   selector: 'app-profile',
@@ -24,13 +24,13 @@ export class ProfileComponent implements OnInit {
   password: string = "";
 
   //DATOS PARA AÑADIR UN Anime
-  startDate: string = "";
-  endDate: string = "";
-  rating: string = "" ;
-  episodeProgress: string = "";
-  status: string = "";
+  startDate?: Date;
+  endDate?: Date;
+  rating?: string = "" ;
+  episodeProgress?: number;
+  status?: string;
 
-  constructor(private router: Router, private routeActivated: ActivatedRoute, public authService: AuthService) { }
+  constructor(private router: Router, private routeActivated: ActivatedRoute, public authService: AuthService, public animeAPI: AnimeAPIService) { }
 
   ngOnInit(): void {
     this.name = this.authService.user.name;
@@ -53,21 +53,32 @@ export class ProfileComponent implements OnInit {
             status: this.nombre_animes[i].status,
           }
           this.animes.push(anime);
+    this.animeAPI.getAnimesAPI().subscribe(
+      (data: any[]) => {
+        for (let elemnet of data) {
 
-          switch (anime.status) {
-            case Status.WATCHING:
-              this.watching.push(this.animes[i]);
-              break;
-            case Status.PLAN_TO_WATCH:
-              this.planToWatch.push(this.animes[i]);
-              break;
-            case Status.COMPLETED:
-              this.completed.push(this.animes[i]);
-              break;
-            default:
-              break;
-          }
+        switch (anime.status) {
+          case 'WATCHING':
+            this.watching.push(this.animes[i]);
+            break;
+          case 'PLAN_TO_WATCH':
+            this.planToWatch.push(this.animes[i]);
+            break;
+          case 'COMPLETED':
+            this.completed.push(this.animes[i]);
+            break;
+          default:
+            break;
         }
+        }
+
+      },
+      (error) => {
+        console.error('Error al obtener los animes:', error);
+      }
+    );
+        }
+        console.log(this);
       },
       (error) => {
         console.error('Error al obtener los favoritos:', error);
@@ -84,7 +95,7 @@ export class ProfileComponent implements OnInit {
         status: this.status
       };
 
-    this.authService.anadirAnime(this.authService.user.id,anime).subscribe(
+    this.authService.anadirAnime(this.authService.user.id, anime).subscribe(
       response => {
         console.log('Anime agregado a la lista:', response);
         this.cargarAnimes(this.authService.user.id);
@@ -111,10 +122,10 @@ export class ProfileComponent implements OnInit {
   }
 
   vaciarCampos(){
-    this.startDate = "";
-    this.endDate = "";
+    this.startDate = new Date();
+    this.endDate = new Date();
     this.rating = "";
-    this.episodeProgress = "";
-    this.status = "";
+    this.episodeProgress = 0;
+    this.status = undefined;
   }
 }

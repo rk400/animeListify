@@ -29,10 +29,10 @@ public class UserService {
         return userRepository.findById(userId).orElse(null);
     }
 
-    public void addAnime(Long userId, String idAnime) {
+    public void addAnime(Long userId, UserAnime anime) {
         User user = userRepository.findById(userId).orElse(null);
         if (user != null) {
-            user.addAnime(idAnime);
+            user.addAnime(anime);
             userRepository.save(user);
         }
     }

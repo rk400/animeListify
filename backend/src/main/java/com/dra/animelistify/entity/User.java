@@ -76,10 +76,9 @@ public class User {
     this.userAnimes = userAnimes;
   }
 
- public UserAnime addAnime(String idAnime) {
-    UserAnime userAnime = new UserAnime(this, idAnime);
-    userAnimes.add(userAnime);
-    return userAnime;
+ public User addAnime(UserAnime anime) {
+    userAnimes.add(anime);
+    return this;
 }
 
 public void removeAnime(UserAnime userAnime) {

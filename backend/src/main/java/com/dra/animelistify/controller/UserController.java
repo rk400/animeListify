@@ -40,13 +40,13 @@ public class UserController {
     @PostMapping("/{userId}/animes")
     public ResponseEntity<UserAnime> addAnime(
             @PathVariable Long userId,
-            @RequestBody String idAnime) {
+            @RequestBody UserAnime anime) {
         User user = userService.getUser(userId);
         if (user != null) {
             try {
-                UserAnime ua = user.addAnime(idAnime);
+                user = user.addAnime(anime);
                 userService.saveUser(user); // Guardar el usuario actualizado con el nuevo favorito
-                return new ResponseEntity<>(ua, HttpStatus.CREATED);
+                return new ResponseEntity<>(anime, HttpStatus.CREATED);
             } catch (InvalidDataAccessApiUsageException e) {
                 // Se devuelve 202 porque el anime ya estaba en la lista
                 return new ResponseEntity<>(HttpStatus.ACCEPTED);

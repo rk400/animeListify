@@ -1,9 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { skip } from 'rxjs';
 import { AnimeAPIService } from 'src/app/services/anime-api.service';
-import { Anime, Status } from 'src/app/services/anime';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -17,18 +15,22 @@ export class AnimeDetailsComponent implements OnInit {
   title = '';
   id = '';
   main_picture = '';
-  rating = '';
+  rating = 0;
   synopsis = '';
   genres: any[] = [];
-  episodes = '';
-  status = '';
+  episodes: number = 0;
+  status: any;
   start_date: Date | undefined;
   end_date: Date | undefined;
   userStatus: any[] | undefined;
   selectedStatus: any | undefined;
   visible: boolean = false;
 
-  STATUSES: Status[] = [Status.WATCHING, Status.PLAN_TO_WATCH, Status.COMPLETED];
+  STATUSES = [
+    { 'status': 'WATCHING', 'name': 'Watching' },
+    { 'status': 'PLAN_TO_WATCH', 'name': 'Planned to watch' },
+    { 'status': 'COMPLETED', 'name': 'Completed' }
+  ];
 
     showDialog() {
         this.visible = true;
@@ -52,18 +54,9 @@ export class AnimeDetailsComponent implements OnInit {
       this.genres = params['genres'];
       this.episodes = params['episodes'];
       this.rating = params['rating'];
-      this.status = params['status'];
       this.start_date = params['start_date'];
       this.end_date = params['end_date'];
     });
-
-    this.userStatus = [
-      { name: 'Watching', code: 'NY' },
-      { name: 'Planning to Watch', code: 'RM' },
-      { name: 'Completed', code: 'LDN' },
-      { name: 'Istanbul', code: 'IST' },
-      { name: 'Paris', code: 'PRS' }
-  ];
   }
   ratingConverter(rating: string): number | null {
     const regex = /^([\d,.]+)/;
@@ -115,8 +108,19 @@ export class AnimeDetailsComponent implements OnInit {
     return html;
   }
   saveData(): void {
-    console.log(this.id);
-    this.authService.anadirAnime(this.authService.user.id, this.id)
+    console.log(this.status);
+    const anime = {
+      id: {
+        idAnime: this.id,
+        user: this.authService.user,
+      },
+      status: this.status,
+      startDate: this.start_date,
+      endDate: this.end_date,
+      episodeProgress: this.episodes,
+      rating: this.rating
+    };
+    this.authService.anadirAnime(this.authService.user.id, anime)
       .subscribe(
         (data: any) => {
           console.log("Resultado: " + data);
@@ -125,7 +129,7 @@ export class AnimeDetailsComponent implements OnInit {
           console.error("Error al obtener el producto:", error);
         }
       );
-      this.visible = false;
+    this.visible = false;
   }
   goBack(): void {
     this.location.back();

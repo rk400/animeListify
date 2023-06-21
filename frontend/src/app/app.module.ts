@@ -15,6 +15,7 @@ import { ChipModule } from 'primeng/chip';
 import { DataViewModule, DataViewLayoutOptions } from 'primeng/dataview';
 import { SkeletonModule } from 'primeng/skeleton';
 import { DialogModule } from 'primeng/dialog';
+import { ToastModule } from 'primeng/toast';
 import { FieldsetModule } from 'primeng/fieldset';
 import { DropdownModule } from 'primeng/dropdown';
 
@@ -56,6 +57,7 @@ import { LoginComponent } from './components/login/login.component';
     ButtonModule,
     CardModule,
     CarouselModule,
+    ToastModule,
     DropdownModule,
     DialogModule,
     TagModule,

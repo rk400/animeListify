@@ -9,22 +9,16 @@ export interface Anime {
   synopsis?: string;
   genres?: string[];
   num_episodes?: number;
-  status?: Status | string;
+  status?: string;
   start_date?: string;
   end_date?: string | null;
   main_picture?: AnimePictures;
-  startDate?: string;
-  endDate?: string;
+  startDate?: Date;
+  endDate?: Date;
   episodeProgress?: number;
 }
 
 export interface AnimePictures{
   large: string;
   medium: string;
-}
-
-export enum Status {
-  PLAN_TO_WATCH = "Planned to watch",
-  WATCHING = "Watching",
-  COMPLETED = "Completed",
 }

@@ -29,25 +29,25 @@
           <div class="grid">
             <div class="col-4">
               <p>Status:</p>
-              <p-dropdown [options]="STATUSES" [(ngModel)]="status"
-              ></p-dropdown>
+              <p-dropdown [options]="STATUSES" optionLabel="name" optionValue="status" [(ngModel)]="status">
+              </p-dropdown>
             </div>
             <div class="col-4">
               <p>Rating:</p>
-<p-inputNumber>
+<p-inputNumber  [(ngModel)]="rating">
 </p-inputNumber>
             </div>
             <div class="col-4">
               <p>Start Date:</p>
-              <input type="date"/>
+              <input type="date" [(ngModel)]="start_date"/>
             </div>
             <div class="col-4">
               <p>End Date:</p>
-              <input type="date"/>
+              <input type="date" [(ngModel)]="end_date"/>
             </div>
             <div class="col-4">
               <p>Episode Progress:</p>
-              <p-inputNumber>
+              <p-inputNumber [(ngModel)]="episodes">
               </p-inputNumber>
             </div>
           </div>
