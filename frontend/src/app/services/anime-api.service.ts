@@ -11,7 +11,7 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class AnimeAPIService {
-  private apiKey = '0e42f89998msh8918096688461e2p104704jsnd035db11df5d';
+  private apiKey = 'api_key';
   private apiUrl = 'animes5.p.rapidapi.com';
 
   private urlGET = 'https://animes5.p.rapidapi.com/';
