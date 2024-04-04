@@ -31,19 +31,23 @@ docker-compose up -d
 ```
 
 ### Running manually
+Create a network
+```cmd
+docker network create test
+```
 Starting frontend
 ```cmd
-cd ./frontend
-ng serve --open
+docker build -t frontend:v1 .\frontend\
+docker run -d --name frontendA --network test -p 8080:80 frontend:v1
 ```
 Starting backend
 ```cmd
-cd ./backend
-mvn spring-boot:run
+docker build -t backend:v1 .\backend\
+docker run -d --name backendA --network test -p 8081:8081 backend:v1
 ```
 Starting database
 ```cmd
-docker run -d --name postgresql_database -e POSTGRES_USER=user -e POSTGRES_PASSWORD=pass -e POSTGRES_DB=db -p 5432:5432 -v data:/var/lib/pgsql/data postgres
+docker run -d --network test --name postgresql -e POSTGRES_USER=user -e POSTGRES_PASSWORD=pass -e POSTGRES_DB=db -p 5432:5432 -v data:/var/lib/pgsql/data postgres
 ```
 
 ## Working tools
